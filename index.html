@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Impulsa Studio | Agencia de Marketing Digital para Pymes y Autónomos</title>
+<meta name="description" content="Impulsa Studio diseña webs que convierten y campañas que atraen clientes reales para pymes, autónomos y negocios locales." />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+        },
+        colors: {
+          brand: {
+            50: '#eef2ff',
+            100: '#e0e7ff',
+            400: '#818cf8',
+            500: '#6366f1',
+            600: '#4f46e5',
+            700: '#4338ca',
+            900: '#312e81',
+          },
+        },
+      },
+    },
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; }
+  .gradient-text {
+    background: linear-gradient(90deg, #6366f1, #a855f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+</style>
+</head>
+<body class="bg-white text-slate-900 antialiased">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="text-xl font-extrabold tracking-tight">
+        Impulsa<span class="text-brand-600">Studio</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+        <a href="#servicios" class="hover:text-brand-600 transition">Servicios</a>
+        <a href="#diferenciadores" class="hover:text-brand-600 transition">Por qué nosotros</a>
+        <a href="#proceso" class="hover:text-brand-600 transition">Proceso</a>
+        <a href="#contacto" class="hover:text-brand-600 transition">Contacto</a>
+      </nav>
+      <a href="#contacto" class="hidden md:inline-flex items-center rounded-full bg-slate-900 text-white text-sm font-semibold px-5 py-2.5 hover:bg-brand-600 transition">
+        Diagnóstico Gratuito
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-brand-50 via-white to-white"></div>
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-200 rounded-full blur-3xl opacity-40 -z-10"></div>
+
+    <div class="max-w-5xl mx-auto px-6 pt-20 pb-24 text-center">
+      <span class="inline-block bg-brand-100 text-brand-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-6">
+        Marketing digital para pymes y autónomos
+      </span>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight">
+        Más clientes. Más ventas.
+        <span class="block gradient-text">Sin depender de la suerte.</span>
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto">
+        Impulsa Studio diseña webs que convierten y campañas que atraen clientes reales para pymes, autónomos y negocios locales. Estrategia digital con resultados medibles, no promesas vacías.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#contacto" class="w-full sm:w-auto inline-flex justify-center items-center rounded-full bg-brand-600 text-white font-semibold px-8 py-4 shadow-lg shadow-brand-600/30 hover:bg-brand-700 hover:shadow-xl transition">
+          Quiero mi Diagnóstico Gratuito
+        </a>
+        <a href="#servicios" class="w-full sm:w-auto inline-flex justify-center items-center rounded-full border border-slate-300 text-slate-700 font-semibold px-8 py-4 hover:border-slate-400 hover:bg-slate-50 transition">
+          Ver servicios
+        </a>
+      </div>
+      <p class="mt-5 text-sm text-slate-500">Sin compromiso · Respuesta en menos de 24h laborables</p>
+    </div>
+  </section>
+
+  <!-- DOLOR / SOLUCION -->
+  <section class="bg-slate-900 text-white">
+    <div class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="text-3xl sm:text-4xl font-bold leading-tight">
+          Tienes un buen negocio. <span class="text-brand-400">Tu presencia digital no está a la altura.</span>
+        </h2>
+        <p class="mt-5 text-slate-300 text-lg">
+          Cada día, clientes potenciales te buscan en Google y en redes sociales. Si no te encuentran, se van con la competencia.
+        </p>
+        <ul class="mt-8 space-y-4">
+          <li class="flex items-start gap-3">
+            <span class="mt-1 text-red-400">✕</span>
+            <span class="text-slate-200">Tu web no genera contactos, solo existe.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 text-red-400">✕</span>
+            <span class="text-slate-200">Inviertes en anuncios pero no sabes si funcionan.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 text-red-400">✕</span>
+            <span class="text-slate-200">Publicas en redes sin una estrategia detrás.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 text-red-400">✕</span>
+            <span class="text-slate-200">No tienes tiempo para ocuparte del marketing tú mismo.</span>
+          </li>
+        </ul>
+      </div>
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8">
+        <h3 class="text-xl font-semibold text-brand-400 mb-3">La solución</h3>
+        <p class="text-slate-200 text-lg leading-relaxed">
+          En Impulsa Studio convertimos tu marketing en un <strong class="text-white">sistema que trabaja para ti</strong>: una web que vende, campañas que atraen y una estrategia que se ajusta según los datos, no según intuiciones.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios" class="max-w-7xl mx-auto px-6 py-24">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-brand-600 font-semibold text-sm uppercase tracking-wide">Servicios</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold">Todo lo que necesitas para crecer, en un solo sitio</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="group rounded-2xl border border-slate-200 p-8 hover:border-brand-300 hover:shadow-xl hover:shadow-brand-100 transition">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-2xl mb-5">🖥️</div>
+        <h3 class="font-bold text-lg mb-2">Diseño y Desarrollo Web</h3>
+        <p class="text-slate-600 text-sm leading-relaxed">Webs rápidas, modernas y pensadas para convertir visitas en clientes. Sin plantillas genéricas.</p>
+      </div>
+      <div class="group rounded-2xl border border-slate-200 p-8 hover:border-brand-300 hover:shadow-xl hover:shadow-brand-100 transition">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-2xl mb-5">📈</div>
+        <h3 class="font-bold text-lg mb-2">Estrategia Digital y SEO</h3>
+        <p class="text-slate-600 text-sm leading-relaxed">Posicionamos tu negocio donde tus clientes buscan. Más visibilidad orgánica, menos dependencia de la publicidad de pago.</p>
+      </div>
+      <div class="group rounded-2xl border border-slate-200 p-8 hover:border-brand-300 hover:shadow-xl hover:shadow-brand-100 transition">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-2xl mb-5">🎯</div>
+        <h3 class="font-bold text-lg mb-2">Gestión de Campañas / Ads</h3>
+        <p class="text-slate-600 text-sm leading-relaxed">Anuncios en Google y Meta gestionados y optimizados cada semana. Cada euro invertido, justificado con datos.</p>
+      </div>
+      <div class="group rounded-2xl border border-slate-200 p-8 hover:border-brand-300 hover:shadow-xl hover:shadow-brand-100 transition">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-2xl mb-5">🤝</div>
+        <h3 class="font-bold text-lg mb-2">Captación de Clientes</h3>
+        <p class="text-slate-600 text-sm leading-relaxed">Sistemas de generación de leads que llenan tu embudo de ventas de forma constante, no puntual.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFERENCIADORES -->
+  <section id="diferenciadores" class="bg-brand-50">
+    <div class="max-w-7xl mx-auto px-6 py-24">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-brand-600 font-semibold text-sm uppercase tracking-wide">Por qué elegirnos</span>
+        <h2 class="mt-3 text-3xl sm:text-4xl font-bold">No vendemos marketing. Vendemos resultados.</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white rounded-2xl p-8 shadow-sm">
+          <div class="text-3xl mb-4">📊</div>
+          <h3 class="font-bold mb-2">Enfoque en resultados</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">Medimos cada acción por su impacto en tus ventas, no por likes ni vanity metrics.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm">
+          <div class="text-3xl mb-4">💬</div>
+          <h3 class="font-bold mb-2">Atención personalizada</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">Un equipo que conoce tu negocio, no un call center con 50 clientes a la vez.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm">
+          <div class="text-3xl mb-4">🔍</div>
+          <h3 class="font-bold mb-2">Transparencia total</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">Reportes claros y accesos directos a tus campañas. Sabes en todo momento en qué se invierte cada euro.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm">
+          <div class="text-3xl mb-4">🧩</div>
+          <h3 class="font-bold mb-2">Estrategia a medida</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">Nada de paquetes cerrados. Diseñamos el plan según tu sector, tu presupuesto y tus objetivos reales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section id="proceso" class="max-w-7xl mx-auto px-6 py-24">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-brand-600 font-semibold text-sm uppercase tracking-wide">Proceso de trabajo</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-bold">Así empezamos a trabajar juntos</h2>
+    </div>
+    <div class="grid md:grid-cols-4 gap-8 relative">
+      <div class="hidden md:block absolute top-6 left-0 right-0 h-0.5 bg-slate-200"></div>
+      <div class="relative text-center">
+        <div class="relative z-10 mx-auto w-12 h-12 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center">1</div>
+        <h3 class="mt-5 font-bold">Diagnóstico Gratuito</h3>
+        <p class="mt-2 text-slate-600 text-sm leading-relaxed">Analizamos tu presencia digital actual y detectamos dónde estás perdiendo clientes.</p>
+      </div>
+      <div class="relative text-center">
+        <div class="relative z-10 mx-auto w-12 h-12 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center">2</div>
+        <h3 class="mt-5 font-bold">Estrategia a Medida</h3>
+        <p class="mt-2 text-slate-600 text-sm leading-relaxed">Diseñamos un plan claro con objetivos, plazos y prioridades adaptado a tu negocio.</p>
+      </div>
+      <div class="relative text-center">
+        <div class="relative z-10 mx-auto w-12 h-12 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center">3</div>
+        <h3 class="mt-5 font-bold">Ejecución</h3>
+        <p class="mt-2 text-slate-600 text-sm leading-relaxed">Ponemos en marcha web, SEO y campañas. Tú te enfocas en atender a los clientes que llegan.</p>
+      </div>
+      <div class="relative text-center">
+        <div class="relative z-10 mx-auto w-12 h-12 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center">4</div>
+        <h3 class="mt-5 font-bold">Optimización Continua</h3>
+        <p class="mt-2 text-slate-600 text-sm leading-relaxed">Analizamos resultados cada mes y ajustamos la estrategia para escalar lo que funciona.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="bg-slate-900 text-white">
+    <div class="max-w-6xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <h2 class="text-3xl sm:text-4xl font-bold leading-tight">¿Hablamos de cómo hacer crecer tu negocio?</h2>
+        <p class="mt-5 text-slate-300 text-lg">
+          Agenda una llamada de valoración gratuita de 30 minutos. Sin compromiso, sin letra pequeña.
+        </p>
+        <ul class="mt-8 space-y-3 text-slate-300 text-sm">
+          <li class="flex items-center gap-2"><span class="text-brand-400">✓</span> Análisis honesto de tu situación actual</li>
+          <li class="flex items-center gap-2"><span class="text-brand-400">✓</span> Recomendaciones que puedes aplicar ya, con o sin nosotros</li>
+          <li class="flex items-center gap-2"><span class="text-brand-400">✓</span> Sin permanencia, sin presión de venta</li>
+        </ul>
+      </div>
+
+      <form class="bg-white rounded-2xl p-8 text-slate-900 shadow-2xl" onsubmit="event.preventDefault(); alert('¡Gracias! Te contactaremos en menos de 24h laborables.');">
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Nombre</label>
+            <input type="text" required class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Tu nombre" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Email</label>
+            <input type="email" required class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="tunombre@email.com" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Teléfono</label>
+            <input type="tel" required class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="+34 600 000 000" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Nombre del negocio</label>
+            <input type="text" class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Nombre de tu empresa" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">¿Qué te gustaría conseguir?</label>
+            <select class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500">
+              <option>Más clientes</option>
+              <option>Mejorar mi web</option>
+              <option>Aparecer en Google</option>
+              <option>No lo tengo claro</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="mt-6 w-full rounded-full bg-brand-600 text-white font-semibold px-8 py-4 hover:bg-brand-700 transition">
+          Reservar mi Llamada Gratuita
+        </button>
+        <p class="mt-3 text-center text-xs text-slate-500">Te contactamos en menos de 24h laborables.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 text-sm">
+    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span class="font-bold text-white">Impulsa<span class="text-brand-400">Studio</span></span>
+      <p>&copy; 2026 Impulsa Studio. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
