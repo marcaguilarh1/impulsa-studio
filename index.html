@@ -117,30 +117,36 @@
     .btn-spinner { animation: none; }
   }
 
-  /* Intro: gorila rompe el bloque */
+  /* Intro: gorila colorido entra dando una voltereta y rompe los bloques */
   #intro {
     position: fixed; inset: 0; z-index: 200; background: #14123a;
     display: flex; align-items: center; justify-content: center;
     transition: opacity .45s ease, visibility .45s ease;
   }
   #intro.intro-hide { opacity: 0; visibility: hidden; pointer-events: none; }
-  #intro-stage { width: min(70vw, 380px); }
-  #intro-arm { transform-origin: 150px 150px; transform: rotate(0deg); transition: transform .5s cubic-bezier(.33,0,.2,1); }
-  #intro.intro-raise #intro-arm { transition: transform .5s cubic-bezier(.33,0,.67,1); transform: rotate(50deg); }
-  #intro.intro-swing #intro-arm { transition: transform .16s cubic-bezier(.6,0,1,.4); transform: rotate(100deg); }
-  #intro-block { transition: opacity .1s linear; }
-  #intro-crack { opacity: 0; stroke-dasharray: 140; stroke-dashoffset: 140; transition: opacity .05s linear, stroke-dashoffset .16s ease-out; }
-  #intro.intro-impact #intro-crack { opacity: 1; stroke-dashoffset: 0; }
+  #intro-stage { width: min(70vw, 380px); overflow: visible; }
+
+  #intro-enter { transform: translateX(-260px); animation: intro-enter-slide .6s cubic-bezier(.2,.8,.3,1) .1s forwards; }
+  #intro-spin { transform-origin: 108px 185px; animation: intro-enter-spin .6s linear .1s forwards; }
+  @keyframes intro-enter-slide { to { transform: translateX(0); } }
+  @keyframes intro-enter-spin { to { transform: rotate(360deg); } }
+
+  #intro-arm { transform-origin: 150px 150px; transform: rotate(0deg); transition: transform .3s cubic-bezier(.33,0,.2,1); }
+  #intro.intro-raise #intro-arm { transition: transform .3s cubic-bezier(.33,0,.67,1); transform: rotate(50deg); }
+  #intro.intro-swing #intro-arm { transition: transform .14s cubic-bezier(.6,0,1,.4); transform: rotate(100deg); }
+  #intro-block-a, #intro-block-b { transition: opacity .1s linear; }
+  #intro-crack-a, #intro-crack-b { opacity: 0; stroke-dasharray: 140; stroke-dashoffset: 140; transition: opacity .05s linear, stroke-dashoffset .16s ease-out; }
+  #intro.intro-impact #intro-crack-a, #intro.intro-impact #intro-crack-b { opacity: 1; stroke-dashoffset: 0; }
   #intro.intro-impact #intro-stage { animation: intro-shake .28s ease; }
-  #intro-shards path { transition: transform .55s cubic-bezier(.2,.7,.3,1), opacity .55s ease; }
-  #intro.intro-impact #intro-block { opacity: 0; transition: opacity .05s linear .1s; }
-  #intro.intro-impact #intro-shards path { opacity: 1; }
-  #intro-shards path { opacity: 0; }
-  #intro.intro-impact #intro-shards path:nth-child(1) { transform: translate(-46px, 34px) rotate(-40deg); }
-  #intro.intro-impact #intro-shards path:nth-child(2) { transform: translate(10px, 52px) rotate(30deg); }
-  #intro.intro-impact #intro-shards path:nth-child(3) { transform: translate(50px, 18px) rotate(60deg); }
-  #intro.intro-impact #intro-shards path:nth-child(4) { transform: translate(-18px, -44px) rotate(-70deg); }
-  #intro.intro-impact #intro-shards path:nth-child(5) { transform: translate(38px, -28px) rotate(50deg); }
+  #intro-shards-a path, #intro-shards-b path { opacity: 0; transition: transform .55s cubic-bezier(.2,.7,.3,1), opacity .55s ease; }
+  #intro.intro-impact #intro-block-a, #intro.intro-impact #intro-block-b { opacity: 0; transition: opacity .05s linear .1s; }
+  #intro.intro-impact #intro-shards-a path, #intro.intro-impact #intro-shards-b path { opacity: 1; }
+  #intro.intro-impact #intro-shards-a path:nth-child(1) { transform: translate(-38px, 28px) rotate(-40deg); }
+  #intro.intro-impact #intro-shards-a path:nth-child(2) { transform: translate(20px, 44px) rotate(35deg); }
+  #intro.intro-impact #intro-shards-a path:nth-child(3) { transform: translate(-8px, -40px) rotate(-60deg); }
+  #intro.intro-impact #intro-shards-b path:nth-child(1) { transform: translate(-30px, 40px) rotate(-30deg); }
+  #intro.intro-impact #intro-shards-b path:nth-child(2) { transform: translate(36px, 30px) rotate(45deg); }
+  #intro.intro-impact #intro-shards-b path:nth-child(3) { transform: translate(8px, -46px) rotate(65deg); }
   @keyframes intro-shake {
     0%, 100% { transform: translate(0, 0); }
     20% { transform: translate(-6px, 2px); }
@@ -168,49 +174,65 @@
       <!-- suelo -->
       <ellipse cx="190" cy="228" rx="150" ry="10" fill="#0d0c28"/>
 
-      <!-- gorila -->
-      <g>
-        <path d="M65 150Q55 165 55 190Q55 215 75 226L150 226Q170 215 170 190Q170 160 158 150Q145 138 112 138Q80 138 65 150Z" fill="#2b2850"/>
-        <path d="M62 158Q42 175 40 205Q39 222 52 226L64 226Q58 205 62 185Z" fill="#241f47"/>
-        <circle cx="82" cy="92" r="10" fill="#332f5c"/>
-        <circle cx="138" cy="92" r="10" fill="#332f5c"/>
-        <circle cx="110" cy="95" r="32" fill="#332f5c"/>
-        <path d="M84 84Q110 72 136 84L136 93Q110 83 84 93Z" fill="#1f1c40"/>
-        <circle cx="100" cy="99" r="4" fill="#14123a"/>
-        <circle cx="120" cy="99" r="4" fill="#14123a"/>
-        <ellipse cx="104" cy="113" rx="2.5" ry="2" fill="#1f1c40"/>
-        <ellipse cx="116" cy="113" rx="2.5" ry="2" fill="#1f1c40"/>
-        <path d="M96 119Q110 129 124 119" stroke="#1f1c40" stroke-width="3" stroke-linecap="round" fill="none"/>
-        <g id="intro-arm">
-          <rect x="141" y="90" width="18" height="62" rx="9" fill="#332f5c"/>
-          <rect x="145" y="68" width="10" height="82" rx="5" fill="#a1a1aa"/>
-          <rect x="128" y="52" width="44" height="20" rx="6" fill="#4f46e5"/>
+      <!-- gorila colorido: entra desde fuera de pantalla dando una voltereta -->
+      <g id="intro-enter">
+        <g id="intro-spin">
+          <path d="M65 150Q55 165 55 190Q55 215 75 226L150 226Q170 215 170 190Q170 160 158 150Q145 138 112 138Q80 138 65 150Z" fill="#e8823a"/>
+          <path d="M62 158Q42 175 40 205Q39 222 52 226L64 226Q58 205 62 185Z" fill="#c2652a"/>
+          <ellipse cx="114" cy="200" rx="28" ry="20" fill="#fde8d0"/>
+          <path d="M78 141Q112 153 146 141L146 151Q112 161 78 151Z" fill="#dc2626"/>
+          <circle cx="82" cy="92" r="10" fill="#c2652a"/>
+          <circle cx="138" cy="92" r="10" fill="#c2652a"/>
+          <circle cx="110" cy="95" r="32" fill="#e8823a"/>
+          <ellipse cx="110" cy="107" rx="19" ry="15" fill="#fde8d0"/>
+          <path d="M84 84Q110 72 136 84L136 93Q110 83 84 93Z" fill="#c2652a"/>
+          <circle cx="100" cy="99" r="4" fill="#1f1c40"/>
+          <circle cx="120" cy="99" r="4" fill="#1f1c40"/>
+          <ellipse cx="104" cy="113" rx="2.5" ry="2" fill="#1f1c40"/>
+          <ellipse cx="116" cy="113" rx="2.5" ry="2" fill="#1f1c40"/>
+          <path d="M96 119Q110 129 124 119" stroke="#1f1c40" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <g id="intro-arm">
+            <rect x="141" y="90" width="18" height="62" rx="9" fill="#e8823a"/>
+            <rect x="145" y="68" width="10" height="82" rx="5" fill="#d4d4d8"/>
+            <rect x="128" y="52" width="44" height="20" rx="6" fill="#4f46e5"/>
+          </g>
         </g>
       </g>
 
-      <!-- bloque -->
-      <g id="intro-block">
-        <rect x="205" y="150" width="120" height="78" rx="6" fill="#4338ca"/>
-        <rect x="205" y="150" width="120" height="78" rx="6" fill="url(#intro-block-grad)" opacity="0.5"/>
-        <line x1="205" y1="176" x2="325" y2="176" stroke="#312e81" stroke-width="2"/>
-        <line x1="205" y1="202" x2="325" y2="202" stroke="#312e81" stroke-width="2"/>
-        <line x1="245" y1="150" x2="245" y2="176" stroke="#312e81" stroke-width="2"/>
-        <line x1="285" y1="176" x2="285" y2="202" stroke="#312e81" stroke-width="2"/>
-        <line x1="265" y1="202" x2="265" y2="228" stroke="#312e81" stroke-width="2"/>
+      <!-- bloques -->
+      <g id="intro-block-a">
+        <rect x="195" y="160" width="60" height="68" rx="5" fill="url(#intro-block-grad-a)"/>
+        <line x1="195" y1="194" x2="255" y2="194" stroke="#4c1d95" stroke-width="2"/>
+        <line x1="225" y1="160" x2="225" y2="194" stroke="#4c1d95" stroke-width="2"/>
+        <line x1="212" y1="194" x2="212" y2="228" stroke="#4c1d95" stroke-width="2"/>
       </g>
-      <path id="intro-crack" d="M235 150 L220 178 L242 190 L225 228" stroke="#c4b5fd" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <g id="intro-block-b">
+        <rect x="265" y="138" width="85" height="90" rx="5" fill="url(#intro-block-grad-b)"/>
+        <line x1="265" y1="163" x2="350" y2="163" stroke="#312e81" stroke-width="2"/>
+        <line x1="265" y1="208" x2="350" y2="208" stroke="#312e81" stroke-width="2"/>
+        <line x1="307" y1="163" x2="307" y2="208" stroke="#312e81" stroke-width="2"/>
+      </g>
+      <path id="intro-crack-a" d="M215 160 L203 186 L220 196 L207 228" stroke="#e9d5ff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="intro-crack-b" d="M300 138 L282 168 L308 182 L288 228" stroke="#c4b5fd" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 
       <!-- fragmentos -->
-      <g id="intro-shards" fill="#4338ca">
-        <path d="M205 150 L245 150 L235 185 L205 190 Z"/>
-        <path d="M245 150 L285 150 L290 180 L250 185 Z"/>
-        <path d="M285 150 L325 150 L325 190 L295 185 Z"/>
-        <path d="M205 190 L240 195 L235 228 L205 228 Z"/>
-        <path d="M240 195 L295 190 L325 195 L325 228 L245 228 Z"/>
+      <g id="intro-shards-a" fill="#7c3aed">
+        <path d="M195 160 L225 160 L215 194 L195 200 Z"/>
+        <path d="M225 160 L255 160 L255 195 L220 194 Z"/>
+        <path d="M195 200 L220 194 L255 195 L255 228 L195 228 Z"/>
+      </g>
+      <g id="intro-shards-b" fill="#4338ca">
+        <path d="M265 138 L307 138 L297 183 L265 190 Z"/>
+        <path d="M307 138 L350 138 L350 185 L300 183 Z"/>
+        <path d="M265 190 L297 183 L350 185 L350 228 L265 228 Z"/>
       </g>
 
       <defs>
-        <linearGradient id="intro-block-grad" x1="205" y1="150" x2="325" y2="228">
+        <linearGradient id="intro-block-grad-a" x1="195" y1="160" x2="255" y2="228">
+          <stop offset="0" stop-color="#a78bfa"/>
+          <stop offset="1" stop-color="#7c3aed"/>
+        </linearGradient>
+        <linearGradient id="intro-block-grad-b" x1="265" y1="138" x2="350" y2="228">
           <stop offset="0" stop-color="#818cf8"/>
           <stop offset="1" stop-color="#4338ca"/>
         </linearGradient>
@@ -568,13 +590,13 @@
         finish();
       } else {
         document.documentElement.style.overflow = 'hidden';
-        timers.push(setTimeout(function () { intro.classList.add('intro-raise'); }, 150));
+        timers.push(setTimeout(function () { intro.classList.add('intro-raise'); }, 750));
         timers.push(setTimeout(function () {
           intro.classList.remove('intro-raise');
           intro.classList.add('intro-swing');
-        }, 700));
-        timers.push(setTimeout(function () { intro.classList.add('intro-impact'); }, 870));
-        timers.push(setTimeout(finish, 1650));
+        }, 1050));
+        timers.push(setTimeout(function () { intro.classList.add('intro-impact'); }, 1190));
+        timers.push(setTimeout(finish, 1850));
         skipBtn.addEventListener('click', finish);
       }
     })();
