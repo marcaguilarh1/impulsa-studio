@@ -39,39 +39,131 @@
     background-clip: text;
     color: transparent;
   }
+
+  /* Scroll-reveal */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1); }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1.in-view { transition-delay: .08s; }
+  .reveal-delay-2.in-view { transition-delay: .16s; }
+  .reveal-delay-3.in-view { transition-delay: .24s; }
+  .reveal-delay-4.in-view { transition-delay: .32s; }
+
+  /* Ambient hero blobs */
+  .blob { animation: float 12s ease-in-out infinite; will-change: transform; }
+  .blob-2 { animation-duration: 16s; animation-direction: reverse; }
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-16px, 22px) scale(1.06); }
+  }
+
+  /* Header scroll state */
+  header { transition: box-shadow .3s ease, padding .3s ease; }
+  header.is-scrolled { box-shadow: 0 1px 0 0 rgb(15 23 42 / 0.06), 0 8px 24px -12px rgb(15 23 42 / 0.12); }
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: ''; position: absolute; left: 0; bottom: -4px; height: 2px; width: 0;
+    background: linear-gradient(90deg, #6366f1, #a855f7); transition: width .25s ease;
+  }
+  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+  .nav-link.active { color: #4338ca; }
+
+  /* Mobile menu */
+  #mobile-menu { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+  #mobile-menu.open { max-height: 24rem; }
+  #hamburger span { transition: transform .3s ease, opacity .3s ease; }
+  #hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #hamburger.open span:nth-child(2) { opacity: 0; }
+  #hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Word cycler */
+  #word-cycle { display: inline-block; transition: opacity .35s ease, transform .35s ease; }
+  #word-cycle.swap { opacity: 0; transform: translateY(6px); }
+
+  /* Cards */
+  .tilt-card { transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+  .tilt-card:hover { transform: translateY(-6px); }
+  .tilt-icon { transition: transform .4s ease; }
+  .tilt-card:hover .tilt-icon { transform: rotate(-8deg) scale(1.1); }
+
+  /* Process active step */
+  .step-dot { transition: transform .4s ease, background-color .4s ease, box-shadow .4s ease; }
+  .step-dot.active { transform: scale(1.15); box-shadow: 0 0 0 6px rgb(99 102 241 / 0.15); }
+  .step-line-fill { transition: width 1s ease; }
+
+  /* FAQ accordion */
+  .faq-panel { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .4s ease; }
+  .faq-item.open .faq-panel { max-height: 12rem; padding-top: .5rem; }
+  .faq-chevron { transition: transform .3s ease; }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+  /* Form field states */
+  .field-input.is-valid { border-color: #22c55e; }
+  .field-input.is-invalid { border-color: #f87171; }
+
+  /* Scroll progress bar */
+  #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #6366f1, #a855f7); z-index: 60; transition: width .1s linear; }
+
+  /* Back to top */
+  #back-to-top { opacity: 0; pointer-events: none; transform: translateY(12px); transition: opacity .3s ease, transform .3s ease; }
+  #back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+  .btn-spinner { display: inline-block; width: 1rem; height: 1rem; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 9999px; animation: spin .7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .blob { animation: none; }
+    .btn-spinner { animation: none; }
+  }
 </style>
 </head>
 <body class="bg-white text-slate-900 antialiased">
 
   <!-- NAVBAR -->
-  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-100">
+  <div id="scroll-progress"></div>
+  <header id="site-header" class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-100">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="#" class="text-xl font-extrabold tracking-tight">
         Impulsa<span class="text-brand-600">Studio</span>
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-        <a href="#servicios" class="hover:text-brand-600 transition">Servicios</a>
-        <a href="#diferenciadores" class="hover:text-brand-600 transition">Por qué nosotros</a>
-        <a href="#proceso" class="hover:text-brand-600 transition">Proceso</a>
-        <a href="#contacto" class="hover:text-brand-600 transition">Contacto</a>
+        <a href="#servicios" data-nav class="nav-link hover:text-brand-600 transition">Servicios</a>
+        <a href="#diferenciadores" data-nav class="nav-link hover:text-brand-600 transition">Por qué nosotros</a>
+        <a href="#proceso" data-nav class="nav-link hover:text-brand-600 transition">Proceso</a>
+        <a href="#faq" data-nav class="nav-link hover:text-brand-600 transition">FAQ</a>
+        <a href="#contacto" data-nav class="nav-link hover:text-brand-600 transition">Contacto</a>
       </nav>
       <a href="#contacto" class="hidden md:inline-flex items-center rounded-full bg-slate-900 text-white text-sm font-semibold px-5 py-2.5 hover:bg-brand-600 transition">
         Diagnóstico Gratuito
       </a>
+      <button id="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10 rounded-lg hover:bg-slate-100 transition">
+        <span class="block w-5 h-0.5 bg-slate-800 rounded"></span>
+        <span class="block w-5 h-0.5 bg-slate-800 rounded"></span>
+        <span class="block w-5 h-0.5 bg-slate-800 rounded"></span>
+      </button>
     </div>
+    <nav id="mobile-menu" class="md:hidden px-6 flex flex-col gap-1 text-sm font-medium text-slate-700 bg-white border-t border-slate-100">
+      <a href="#servicios" data-nav class="py-3 border-b border-slate-100">Servicios</a>
+      <a href="#diferenciadores" data-nav class="py-3 border-b border-slate-100">Por qué nosotros</a>
+      <a href="#proceso" data-nav class="py-3 border-b border-slate-100">Proceso</a>
+      <a href="#faq" data-nav class="py-3 border-b border-slate-100">FAQ</a>
+      <a href="#contacto" data-nav class="py-4 font-semibold text-brand-600">Diagnóstico Gratuito →</a>
+    </nav>
   </header>
 
   <!-- HERO -->
   <section class="relative overflow-hidden">
     <div class="absolute inset-0 -z-10 bg-gradient-to-b from-brand-50 via-white to-white"></div>
-    <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-200 rounded-full blur-3xl opacity-40 -z-10"></div>
+    <div class="blob absolute -top-24 -right-24 w-96 h-96 bg-brand-200 rounded-full blur-3xl opacity-40 -z-10"></div>
+    <div class="blob blob-2 absolute -bottom-32 -left-16 w-80 h-80 bg-purple-200 rounded-full blur-3xl opacity-30 -z-10"></div>
 
     <div class="max-w-5xl mx-auto px-6 pt-20 pb-24 text-center">
-      <span class="inline-block bg-brand-100 text-brand-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-6">
+      <span class="inline-block bg-brand-100 text-brand-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-6 animate-pulse">
         Marketing digital para pymes y autónomos
       </span>
       <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight">
-        Más clientes. Más ventas.
+        Más clientes. Más <span id="word-cycle">ventas</span>.
         <span class="block gradient-text">Sin depender de la suerte.</span>
       </h1>
       <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto">
@@ -92,7 +184,7 @@
   <!-- DOLOR / SOLUCION -->
   <section class="bg-slate-900 text-white">
     <div class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
-      <div>
+      <div class="reveal">
         <h2 class="text-3xl sm:text-4xl font-bold leading-tight">
           Tienes un buen negocio. <span class="text-brand-400">Tu presencia digital no está a la altura.</span>
         </h2>
@@ -118,7 +210,7 @@
           </li>
         </ul>
       </div>
-      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8">
+      <div class="reveal reveal-delay-2 bg-slate-800 border border-slate-700 rounded-2xl p-8 hover:border-brand-500 transition-colors">
         <h3 class="text-xl font-semibold text-brand-400 mb-3">La solución</h3>
         <p class="text-slate-200 text-lg leading-relaxed">
           En Impulsa Studio convertimos tu marketing en un <strong class="text-white">sistema que trabaja para ti</strong>: una web que vende, campañas que atraen y una estrategia que se ajusta según los datos, no según intuiciones.
@@ -129,28 +221,28 @@
 
   <!-- SERVICIOS -->
   <section id="servicios" class="max-w-7xl mx-auto px-6 py-24">
-    <div class="text-center max-w-2xl mx-auto mb-16">
+    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
       <span class="text-brand-600 font-semibold text-sm uppercase tracking-wide">Servicios</span>
       <h2 class="mt-3 text-3xl sm:text-4xl font-bold">Todo lo que necesitas para crecer, en un solo sitio</h2>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="group rounded-2xl border border-slate-200 p-8 hover:border-brand-300 hover:shadow-xl hover:shadow-brand-100 transition">
-        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-2xl mb-5">🖥️</div>
+      <div class="tilt-card reveal group rounded-2xl border border-slate-200 p-8 hover:border-brand-300 hover:shadow-xl hover:shadow-brand-100">
+        <div class="tilt-icon w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-2xl mb-5">🖥️</div>
         <h3 class="font-bold text-lg mb-2">Diseño y Desarrollo Web</h3>
         <p class="text-slate-600 text-sm leading-relaxed">Webs rápidas, modernas y pensadas para convertir visitas en clientes. Sin plantillas genéricas.</p>
       </div>
-      <div class="group rounded-2xl border border-slate-200 p-8 hover:border-brand-300 hover:shadow-xl hover:shadow-brand-100 transition">
-        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-2xl mb-5">📈</div>
+      <div class="tilt-card reveal reveal-delay-1 group rounded-2xl border border-slate-200 p-8 hover:border-brand-300 hover:shadow-xl hover:shadow-brand-100">
+        <div class="tilt-icon w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-2xl mb-5">📈</div>
         <h3 class="font-bold text-lg mb-2">Estrategia Digital y SEO</h3>
         <p class="text-slate-600 text-sm leading-relaxed">Posicionamos tu negocio donde tus clientes buscan. Más visibilidad orgánica, menos dependencia de la publicidad de pago.</p>
       </div>
-      <div class="group rounded-2xl border border-slate-200 p-8 hover:border-brand-300 hover:shadow-xl hover:shadow-brand-100 transition">
-        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-2xl mb-5">🎯</div>
+      <div class="tilt-card reveal reveal-delay-2 group rounded-2xl border border-slate-200 p-8 hover:border-brand-300 hover:shadow-xl hover:shadow-brand-100">
+        <div class="tilt-icon w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-2xl mb-5">🎯</div>
         <h3 class="font-bold text-lg mb-2">Gestión de Campañas / Ads</h3>
         <p class="text-slate-600 text-sm leading-relaxed">Anuncios en Google y Meta gestionados y optimizados cada semana. Cada euro invertido, justificado con datos.</p>
       </div>
-      <div class="group rounded-2xl border border-slate-200 p-8 hover:border-brand-300 hover:shadow-xl hover:shadow-brand-100 transition">
-        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-2xl mb-5">🤝</div>
+      <div class="tilt-card reveal reveal-delay-3 group rounded-2xl border border-slate-200 p-8 hover:border-brand-300 hover:shadow-xl hover:shadow-brand-100">
+        <div class="tilt-icon w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-2xl mb-5">🤝</div>
         <h3 class="font-bold text-lg mb-2">Captación de Clientes</h3>
         <p class="text-slate-600 text-sm leading-relaxed">Sistemas de generación de leads que llenan tu embudo de ventas de forma constante, no puntual.</p>
       </div>
@@ -160,28 +252,28 @@
   <!-- DIFERENCIADORES -->
   <section id="diferenciadores" class="bg-brand-50">
     <div class="max-w-7xl mx-auto px-6 py-24">
-      <div class="text-center max-w-2xl mx-auto mb-16">
+      <div class="text-center max-w-2xl mx-auto mb-16 reveal">
         <span class="text-brand-600 font-semibold text-sm uppercase tracking-wide">Por qué elegirnos</span>
         <h2 class="mt-3 text-3xl sm:text-4xl font-bold">No vendemos marketing. Vendemos resultados.</h2>
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-white rounded-2xl p-8 shadow-sm">
-          <div class="text-3xl mb-4">📊</div>
+        <div class="tilt-card reveal bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl">
+          <div class="tilt-icon text-3xl mb-4">📊</div>
           <h3 class="font-bold mb-2">Enfoque en resultados</h3>
           <p class="text-slate-600 text-sm leading-relaxed">Medimos cada acción por su impacto en tus ventas, no por likes ni vanity metrics.</p>
         </div>
-        <div class="bg-white rounded-2xl p-8 shadow-sm">
-          <div class="text-3xl mb-4">💬</div>
+        <div class="tilt-card reveal reveal-delay-1 bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl">
+          <div class="tilt-icon text-3xl mb-4">💬</div>
           <h3 class="font-bold mb-2">Atención personalizada</h3>
           <p class="text-slate-600 text-sm leading-relaxed">Un equipo que conoce tu negocio, no un call center con 50 clientes a la vez.</p>
         </div>
-        <div class="bg-white rounded-2xl p-8 shadow-sm">
-          <div class="text-3xl mb-4">🔍</div>
+        <div class="tilt-card reveal reveal-delay-2 bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl">
+          <div class="tilt-icon text-3xl mb-4">🔍</div>
           <h3 class="font-bold mb-2">Transparencia total</h3>
           <p class="text-slate-600 text-sm leading-relaxed">Reportes claros y accesos directos a tus campañas. Sabes en todo momento en qué se invierte cada euro.</p>
         </div>
-        <div class="bg-white rounded-2xl p-8 shadow-sm">
-          <div class="text-3xl mb-4">🧩</div>
+        <div class="tilt-card reveal reveal-delay-3 bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl">
+          <div class="tilt-icon text-3xl mb-4">🧩</div>
           <h3 class="font-bold mb-2">Estrategia a medida</h3>
           <p class="text-slate-600 text-sm leading-relaxed">Nada de paquetes cerrados. Diseñamos el plan según tu sector, tu presupuesto y tus objetivos reales.</p>
         </div>
@@ -191,31 +283,81 @@
 
   <!-- PROCESO -->
   <section id="proceso" class="max-w-7xl mx-auto px-6 py-24">
-    <div class="text-center max-w-2xl mx-auto mb-16">
+    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
       <span class="text-brand-600 font-semibold text-sm uppercase tracking-wide">Proceso de trabajo</span>
       <h2 class="mt-3 text-3xl sm:text-4xl font-bold">Así empezamos a trabajar juntos</h2>
     </div>
     <div class="grid md:grid-cols-4 gap-8 relative">
-      <div class="hidden md:block absolute top-6 left-0 right-0 h-0.5 bg-slate-200"></div>
-      <div class="relative text-center">
-        <div class="relative z-10 mx-auto w-12 h-12 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center">1</div>
+      <div class="hidden md:block absolute top-6 left-0 right-0 h-0.5 bg-slate-200">
+        <div id="step-line-fill" class="step-line-fill h-full w-0 bg-gradient-to-r from-brand-500 to-purple-500"></div>
+      </div>
+      <div class="step reveal relative text-center">
+        <div class="step-dot relative z-10 mx-auto w-12 h-12 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center">1</div>
         <h3 class="mt-5 font-bold">Diagnóstico Gratuito</h3>
         <p class="mt-2 text-slate-600 text-sm leading-relaxed">Analizamos tu presencia digital actual y detectamos dónde estás perdiendo clientes.</p>
       </div>
-      <div class="relative text-center">
-        <div class="relative z-10 mx-auto w-12 h-12 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center">2</div>
+      <div class="step reveal reveal-delay-1 relative text-center">
+        <div class="step-dot relative z-10 mx-auto w-12 h-12 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center">2</div>
         <h3 class="mt-5 font-bold">Estrategia a Medida</h3>
         <p class="mt-2 text-slate-600 text-sm leading-relaxed">Diseñamos un plan claro con objetivos, plazos y prioridades adaptado a tu negocio.</p>
       </div>
-      <div class="relative text-center">
-        <div class="relative z-10 mx-auto w-12 h-12 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center">3</div>
+      <div class="step reveal reveal-delay-2 relative text-center">
+        <div class="step-dot relative z-10 mx-auto w-12 h-12 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center">3</div>
         <h3 class="mt-5 font-bold">Ejecución</h3>
         <p class="mt-2 text-slate-600 text-sm leading-relaxed">Ponemos en marcha web, SEO y campañas. Tú te enfocas en atender a los clientes que llegan.</p>
       </div>
-      <div class="relative text-center">
-        <div class="relative z-10 mx-auto w-12 h-12 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center">4</div>
+      <div class="step reveal reveal-delay-3 relative text-center">
+        <div class="step-dot relative z-10 mx-auto w-12 h-12 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center">4</div>
         <h3 class="mt-5 font-bold">Optimización Continua</h3>
         <p class="mt-2 text-slate-600 text-sm leading-relaxed">Analizamos resultados cada mes y ajustamos la estrategia para escalar lo que funciona.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="bg-brand-50">
+    <div class="max-w-3xl mx-auto px-6 py-24">
+      <div class="text-center mb-12 reveal">
+        <span class="text-brand-600 font-semibold text-sm uppercase tracking-wide">Preguntas frecuentes</span>
+        <h2 class="mt-3 text-3xl sm:text-4xl font-bold">Resolvemos tus dudas</h2>
+      </div>
+      <div class="space-y-3">
+        <div class="faq-item reveal bg-white rounded-2xl border border-slate-200 px-6">
+          <button type="button" class="faq-toggle w-full flex items-center justify-between gap-4 py-5 text-left font-semibold" aria-expanded="false">
+            <span>¿Cuánto tiempo tarda en verse resultados?</span>
+            <svg class="faq-chevron w-5 h-5 flex-shrink-0 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div class="faq-panel text-slate-600 text-sm leading-relaxed">
+            <p class="pb-5">Depende del canal: el SEO suele tardar entre 2 y 4 meses en mostrar tracción, mientras que las campañas de Ads generan tráfico y leads desde la primera semana. En el diagnóstico gratuito te damos una previsión ajustada a tu sector.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-1 bg-white rounded-2xl border border-slate-200 px-6">
+          <button type="button" class="faq-toggle w-full flex items-center justify-between gap-4 py-5 text-left font-semibold" aria-expanded="false">
+            <span>¿Hay permanencia o contrato de larga duración?</span>
+            <svg class="faq-chevron w-5 h-5 flex-shrink-0 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div class="faq-panel text-slate-600 text-sm leading-relaxed">
+            <p class="pb-5">No. Trabajamos con planes mensuales sin permanencia. Si en algún momento decides parar, no hay penalización: solo pedimos un preaviso de 30 días para cerrar campañas correctamente.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-2 bg-white rounded-2xl border border-slate-200 px-6">
+          <button type="button" class="faq-toggle w-full flex items-center justify-between gap-4 py-5 text-left font-semibold" aria-expanded="false">
+            <span>¿Con qué tipo de negocios trabajáis?</span>
+            <svg class="faq-chevron w-5 h-5 flex-shrink-0 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div class="faq-panel text-slate-600 text-sm leading-relaxed">
+            <p class="pb-5">Principalmente con pymes, autónomos y negocios locales que ya tienen actividad y quieren escalar: clínicas, comercios, hostelería, servicios profesionales y ecommerce en crecimiento.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-3 bg-white rounded-2xl border border-slate-200 px-6">
+          <button type="button" class="faq-toggle w-full flex items-center justify-between gap-4 py-5 text-left font-semibold" aria-expanded="false">
+            <span>¿Qué necesitáis de mí para empezar?</span>
+            <svg class="faq-chevron w-5 h-5 flex-shrink-0 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div class="faq-panel text-slate-600 text-sm leading-relaxed">
+            <p class="pb-5">Solo 30 minutos para la llamada de diagnóstico. A partir de ahí, nosotros preparamos la propuesta y, si decides seguir, nos encargamos de la implementación técnica de principio a fin.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -223,7 +365,7 @@
   <!-- CONTACTO -->
   <section id="contacto" class="bg-slate-900 text-white">
     <div class="max-w-6xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center">
-      <div>
+      <div class="reveal">
         <h2 class="text-3xl sm:text-4xl font-bold leading-tight">¿Hablamos de cómo hacer crecer tu negocio?</h2>
         <p class="mt-5 text-slate-300 text-lg">
           Agenda una llamada de valoración gratuita de 30 minutos. Sin compromiso, sin letra pequeña.
@@ -235,39 +377,46 @@
         </ul>
       </div>
 
-      <form class="bg-white rounded-2xl p-8 text-slate-900 shadow-2xl" onsubmit="event.preventDefault(); alert('¡Gracias! Te contactaremos en menos de 24h laborables.');">
-        <div class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Nombre</label>
-            <input type="text" required class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Tu nombre" />
+      <div id="contact-card" class="reveal reveal-delay-1 bg-white rounded-2xl p-8 text-slate-900 shadow-2xl">
+        <form id="contact-form" novalidate>
+          <div class="space-y-4">
+            <div>
+              <label for="f-name" class="block text-sm font-medium text-slate-700 mb-1">Nombre</label>
+              <input id="f-name" name="name" type="text" required class="field-input w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors" placeholder="Tu nombre" />
+            </div>
+            <div>
+              <label for="f-email" class="block text-sm font-medium text-slate-700 mb-1">Email</label>
+              <input id="f-email" name="email" type="email" required class="field-input w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors" placeholder="tunombre@email.com" />
+            </div>
+            <div>
+              <label for="f-phone" class="block text-sm font-medium text-slate-700 mb-1">Teléfono</label>
+              <input id="f-phone" name="phone" type="tel" required class="field-input w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors" placeholder="+34 600 000 000" />
+            </div>
+            <div>
+              <label for="f-business" class="block text-sm font-medium text-slate-700 mb-1">Nombre del negocio</label>
+              <input id="f-business" name="business" type="text" class="field-input w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors" placeholder="Nombre de tu empresa" />
+            </div>
+            <div>
+              <label for="f-goal" class="block text-sm font-medium text-slate-700 mb-1">¿Qué te gustaría conseguir?</label>
+              <select id="f-goal" name="goal" class="field-input w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors">
+                <option>Más clientes</option>
+                <option>Mejorar mi web</option>
+                <option>Aparecer en Google</option>
+                <option>No lo tengo claro</option>
+              </select>
+            </div>
           </div>
-          <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Email</label>
-            <input type="email" required class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="tunombre@email.com" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Teléfono</label>
-            <input type="tel" required class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="+34 600 000 000" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Nombre del negocio</label>
-            <input type="text" class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Nombre de tu empresa" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">¿Qué te gustaría conseguir?</label>
-            <select class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500">
-              <option>Más clientes</option>
-              <option>Mejorar mi web</option>
-              <option>Aparecer en Google</option>
-              <option>No lo tengo claro</option>
-            </select>
-          </div>
+          <button id="f-submit" type="submit" class="mt-6 w-full rounded-full bg-brand-600 text-white font-semibold px-8 py-4 hover:bg-brand-700 transition flex items-center justify-center gap-2">
+            <span id="f-submit-label">Reservar mi Llamada Gratuita</span>
+          </button>
+          <p class="mt-3 text-center text-xs text-slate-500">Te contactamos en menos de 24h laborables.</p>
+        </form>
+        <div id="contact-success" class="hidden text-center py-6">
+          <div class="mx-auto w-14 h-14 rounded-full bg-green-100 flex items-center justify-center text-3xl">✓</div>
+          <h3 class="mt-4 text-xl font-bold">¡Gracias, recibido!</h3>
+          <p class="mt-2 text-slate-600 text-sm">Te contactaremos en menos de 24h laborables para agendar tu llamada.</p>
         </div>
-        <button type="submit" class="mt-6 w-full rounded-full bg-brand-600 text-white font-semibold px-8 py-4 hover:bg-brand-700 transition">
-          Reservar mi Llamada Gratuita
-        </button>
-        <p class="mt-3 text-center text-xs text-slate-500">Te contactamos en menos de 24h laborables.</p>
-      </form>
+      </div>
     </div>
   </section>
 
@@ -278,6 +427,156 @@
       <p>&copy; 2026 Impulsa Studio. Todos los derechos reservados.</p>
     </div>
   </footer>
+
+  <button id="back-to-top" aria-label="Volver arriba" class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-slate-900 text-white shadow-lg hover:bg-brand-600 transition-colors flex items-center justify-center">
+    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" /></svg>
+  </button>
+
+  <script>
+    // Scroll progress bar + header state + back-to-top
+    var header = document.getElementById('site-header');
+    var progress = document.getElementById('scroll-progress');
+    var backToTop = document.getElementById('back-to-top');
+    function onScroll() {
+      var scrollTop = window.scrollY || document.documentElement.scrollTop;
+      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      progress.style.width = (height > 0 ? (scrollTop / height) * 100 : 0) + '%';
+      header.classList.toggle('is-scrolled', scrollTop > 8);
+      backToTop.classList.toggle('visible', scrollTop > 600);
+    }
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Mobile menu toggle
+    var hamburger = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', function () {
+      var open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.querySelectorAll('#mobile-menu [data-nav]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Scrollspy: highlight active nav link
+    var navLinks = document.querySelectorAll('[data-nav]');
+    var sections = Array.from(navLinks)
+      .map(function (l) { return document.querySelector(l.getAttribute('href')); })
+      .filter(Boolean);
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var id = '#' + entry.target.id;
+          navLinks.forEach(function (l) {
+            l.classList.toggle('active', l.getAttribute('href') === id);
+          });
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(function (s) { spy.observe(s); });
+
+    // Rotating word in hero
+    var words = ['ventas', 'clientes', 'reservas', 'facturación'];
+    var wordEl = document.getElementById('word-cycle');
+    var wi = 0;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (wordEl && !reduceMotion) {
+      setInterval(function () {
+        wordEl.classList.add('swap');
+        setTimeout(function () {
+          wi = (wi + 1) % words.length;
+          wordEl.textContent = words[wi];
+          wordEl.classList.remove('swap');
+        }, 350);
+      }, 2600);
+    }
+
+    // Scroll reveal
+    var revealEls = document.querySelectorAll('.reveal');
+    var revealer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function (el) { revealer.observe(el); });
+
+    // Process steps: active dot + connecting line fill
+    var steps = document.querySelectorAll('.step-dot');
+    var lineFill = document.getElementById('step-line-fill');
+    var stepObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var dot = entry.target.querySelector('.step-dot');
+        if (entry.isIntersecting) {
+          dot.classList.add('active');
+          var index = Array.from(entry.target.parentElement.querySelectorAll('.step')).indexOf(entry.target);
+          var total = entry.target.parentElement.querySelectorAll('.step').length - 1;
+          if (lineFill && total > 0) lineFill.style.width = ((index / total) * 100) + '%';
+        }
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('.step').forEach(function (el) { stepObserver.observe(el); });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var item = btn.closest('.faq-item');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function (open) {
+          open.classList.remove('open');
+          open.querySelector('.faq-toggle').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Contact form: live validation + submit UX (no backend wired up)
+    var form = document.getElementById('contact-form');
+    var successPanel = document.getElementById('contact-success');
+    var submitBtn = document.getElementById('f-submit');
+    var submitLabel = document.getElementById('f-submit-label');
+    form.querySelectorAll('.field-input[required]').forEach(function (field) {
+      field.addEventListener('blur', function () {
+        field.classList.toggle('is-valid', field.checkValidity());
+        field.classList.toggle('is-invalid', !field.checkValidity());
+      });
+      field.addEventListener('input', function () {
+        if (field.classList.contains('is-invalid')) {
+          field.classList.toggle('is-invalid', !field.checkValidity());
+          field.classList.toggle('is-valid', field.checkValidity());
+        }
+      });
+    });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.querySelectorAll('.field-input[required]').forEach(function (field) {
+          field.classList.toggle('is-invalid', !field.checkValidity());
+          field.classList.toggle('is-valid', field.checkValidity());
+        });
+        return;
+      }
+      submitBtn.disabled = true;
+      submitLabel.innerHTML = '<span class="btn-spinner"></span>';
+      setTimeout(function () {
+        form.classList.add('hidden');
+        successPanel.classList.remove('hidden');
+      }, 700);
+    });
+  </script>
 
 </body>
 </html>
