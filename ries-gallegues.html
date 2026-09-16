@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ries Gallegues | Restaurant Marisqueria en Llambilles, Girona</title>
+<meta name="description" content="Ries Gallegues, restaurant marisqueria en Llambilles (Girona). Marisco y pescado fresco de martes a domingo, de 13:00h a 16:30h." />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
+          sans: ['Work Sans', 'ui-sans-serif', 'system-ui'],
+        },
+        colors: {
+          navy: { 50:'#eef3f6', 100:'#d7e3ea', 300:'#7ba0b4', 500:'#2c5a78', 600:'#1f4d6b', 700:'#193f58', 800:'#14324c', 900:'#0f2637' },
+          terracotta: { 50:'#fbf1ea', 100:'#f3d9c4', 300:'#dc9a6c', 500:'#c96f43', 600:'#b25a32', 700:'#8f4626' },
+          seafoam: { 400:'#7bab9f', 500:'#4f8a83', 600:'#3d6f6a' },
+          sand: { 50:'#faf6ef', 100:'#f3ecdd' },
+        },
+      },
+    },
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Work Sans', sans-serif; }
+  .font-display { font-family: 'Fraunces', serif; }
+  .logo-script { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; }
+
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1); }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1.in-view { transition-delay: .08s; }
+  .reveal-delay-2.in-view { transition-delay: .16s; }
+  .reveal-delay-3.in-view { transition-delay: .24s; }
+  .reveal-delay-4.in-view { transition-delay: .32s; }
+
+  header { transition: box-shadow .3s ease; }
+  header.is-scrolled { box-shadow: 0 1px 0 0 rgb(15 38 55 / 0.08), 0 10px 26px -14px rgb(15 38 55 / 0.25); }
+  .nav-link { position: relative; }
+  .nav-link::after { content: ''; position: absolute; left: 0; bottom: -4px; height: 2px; width: 0; background: linear-gradient(90deg, #c96f43, #4f8a83); transition: width .25s ease; }
+  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+  .nav-link.active { color: #14324c; }
+
+  #mobile-menu { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+  #mobile-menu.open { max-height: 26rem; }
+  #hamburger span { transition: transform .3s ease, opacity .3s ease; }
+  #hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #hamburger.open span:nth-child(2) { opacity: 0; }
+  #hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .hero-bg {
+    background:
+      radial-gradient(60% 60% at 85% 10%, rgba(201,111,67,0.35), transparent 60%),
+      radial-gradient(50% 50% at 10% 90%, rgba(79,138,131,0.35), transparent 60%),
+      linear-gradient(160deg, #0f2637 0%, #14324c 45%, #1f4d6b 100%);
+  }
+  .wave-drift { animation: drift 18s ease-in-out infinite; }
+  @keyframes drift { 0%,100% { transform: translateX(0); } 50% { transform: translateX(-3%); } }
+
+  .tilt-card { transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+  .tilt-card:hover { transform: translateY(-6px); }
+  .tilt-icon { transition: transform .4s ease; }
+  .tilt-card:hover .tilt-icon { transform: rotate(-6deg) scale(1.08); }
+
+  #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #c96f43, #4f8a83); z-index: 60; transition: width .1s linear; }
+  #back-to-top { opacity: 0; pointer-events: none; transform: translateY(12px); transition: opacity .3s ease, transform .3s ease; }
+  #back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .wave-drift { animation: none; }
+  }
+</style>
+</head>
+<body class="bg-sand-50 text-navy-800 antialiased">
+
+  <div id="scroll-progress"></div>
+  <header id="site-header" class="sticky top-0 z-50 bg-sand-50/90 backdrop-blur border-b border-navy-100">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="flex flex-col leading-none">
+        <span class="logo-script text-2xl text-navy-800">Ries Gallegues</span>
+        <span class="text-[10px] tracking-[0.25em] text-terracotta-600 font-semibold mt-0.5">RESTAURANT &middot; MARISQUERIA</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-navy-700">
+        <a href="#concepto" data-nav class="nav-link hover:text-navy-900 transition">Restaurante</a>
+        <a href="#menu" data-nav class="nav-link hover:text-navy-900 transition">Menú</a>
+        <a href="#reservas" data-nav class="nav-link hover:text-navy-900 transition">Reservas</a>
+        <a href="#contacto" data-nav class="nav-link hover:text-navy-900 transition">Contacto</a>
+      </nav>
+      <a href="tel:+34972464646" class="hidden md:inline-flex items-center rounded-full bg-navy-800 text-white text-sm font-semibold px-5 py-2.5 hover:bg-terracotta-600 transition">
+        Llamar para reservar
+      </a>
+      <button id="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10 rounded-lg hover:bg-navy-100 transition">
+        <span class="block w-5 h-0.5 bg-navy-800 rounded"></span>
+        <span class="block w-5 h-0.5 bg-navy-800 rounded"></span>
+        <span class="block w-5 h-0.5 bg-navy-800 rounded"></span>
+      </button>
+    </div>
+    <nav id="mobile-menu" class="md:hidden px-6 flex flex-col gap-1 text-sm font-medium text-navy-700 bg-sand-50 border-t border-navy-100">
+      <a href="#concepto" data-nav class="py-3 border-b border-navy-100">Restaurante</a>
+      <a href="#menu" data-nav class="py-3 border-b border-navy-100">Menú</a>
+      <a href="#reservas" data-nav class="py-3 border-b border-navy-100">Reservas</a>
+      <a href="#contacto" data-nav class="py-3 border-b border-navy-100">Contacto</a>
+      <a href="tel:+34972464646" data-nav class="py-4 font-semibold text-terracotta-600">Llamar: 972 46 46 46 →</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero-bg relative overflow-hidden text-white">
+    <div class="wave-drift absolute inset-x-0 bottom-0 opacity-20 -z-0" aria-hidden="true">
+      <svg viewBox="0 0 1440 220" class="w-[120%] -ml-[10%]"><path fill="#faf6ef" d="M0,120 C240,200 480,40 720,90 C960,140 1200,60 1440,110 L1440,220 L0,220 Z"></path></svg>
+    </div>
+    <div class="relative max-w-5xl mx-auto px-6 pt-24 pb-40 text-center">
+      <span class="inline-block bg-white/10 border border-white/20 text-sand-50 text-xs font-semibold tracking-wide px-4 py-1.5 rounded-full mb-6">
+        Llambilles &middot; Girona
+      </span>
+      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-tight">
+        Marisco fresco, carácter gallego,<br class="hidden sm:block" /> mesa de Girona.
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-sand-100/90 max-w-2xl mx-auto">
+        En Ries Gallegues cocinamos cada mediodía el pescado y el marisco más fresco, con el temple de las rías gallegas y la calma de una sobremesa larga en el Gironès.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#reservas" class="w-full sm:w-auto inline-flex justify-center items-center rounded-full bg-terracotta-600 text-white font-semibold px-8 py-4 shadow-lg shadow-terracotta-700/30 hover:bg-terracotta-700 hover:shadow-xl transition">
+          Reservar mesa
+        </a>
+        <a href="#menu" class="w-full sm:w-auto inline-flex justify-center items-center rounded-full border border-white/40 text-white font-semibold px-8 py-4 hover:bg-white/10 transition">
+          Ver el menú
+        </a>
+      </div>
+      <p class="mt-6 text-sm text-sand-100/70">De martes a domingo &middot; 13:00h a 16:30h &middot; Lunes cerrado</p>
+    </div>
+  </section>
+
+  <!-- CONCEPTO -->
+  <section id="concepto" class="max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-14 items-center">
+    <div class="reveal">
+      <span class="text-terracotta-600 font-semibold text-sm uppercase tracking-wide">El restaurante</span>
+      <h2 class="mt-3 font-display text-3xl sm:text-4xl font-semibold text-navy-800">Una marisquería con nombre de ría</h2>
+      <p class="mt-5 text-navy-700 text-lg leading-relaxed">
+        El nombre lo dice todo: <em class="logo-script not-italic font-medium">Ries Gallegues</em> nace del respeto por el producto que llega de la costa, cocinado con técnica sencilla para que el marisco y el pescado sean los protagonistas del plato.
+      </p>
+      <p class="mt-4 text-navy-600 leading-relaxed">
+        Abrimos solo a mediodía, de martes a domingo, para trabajar con calma y con género del día. Un lugar pensado para comidas largas, sin prisa, en Llambilles, a un paso de Girona.
+      </p>
+      <ul class="mt-8 space-y-3 text-navy-700">
+        <li class="flex items-center gap-3"><span class="text-terracotta-600">✓</span> Producto fresco de mercado, sujeto a temporada</li>
+        <li class="flex items-center gap-3"><span class="text-terracotta-600">✓</span> Servicio de mediodía, ideal para comidas de grupo</li>
+        <li class="flex items-center gap-3"><span class="text-terracotta-600">✓</span> A pocos minutos de Girona capital</li>
+      </ul>
+    </div>
+    <div class="reveal reveal-delay-1 relative aspect-[4/5] rounded-3xl bg-gradient-to-br from-navy-700 via-navy-600 to-seafoam-500 overflow-hidden shadow-xl">
+      <svg class="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path d="M0 380 Q100 340 200 380 T400 380 V500 H0 Z" fill="#0f2637" opacity="0.5"/>
+        <path d="M0 420 Q100 390 200 420 T400 420 V500 H0 Z" fill="#0f2637" opacity="0.6"/>
+        <circle cx="320" cy="90" r="60" fill="#c96f43" opacity="0.25"/>
+      </svg>
+      <div class="absolute inset-0 flex items-center justify-center text-center px-8">
+        <p class="logo-script text-white text-2xl sm:text-3xl leading-snug">
+          &ldquo;Del mar a la mesa,<br/>sin artificios.&rdquo;
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu" class="bg-navy-800 text-white">
+    <div class="max-w-7xl mx-auto px-6 py-24">
+      <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+        <span class="text-terracotta-300 font-semibold text-sm uppercase tracking-wide">Menú</span>
+        <h2 class="mt-3 font-display text-3xl sm:text-4xl font-semibold">Lo que sale de lonja, va a la carta</h2>
+        <p class="mt-4 text-navy-100/80">Estas son nuestras familias de plato. La carta detallada con precios varía según la mejor materia prima del día.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="tilt-card reveal bg-navy-700/60 border border-white/10 rounded-2xl p-8 hover:border-terracotta-400/50">
+          <div class="tilt-icon w-12 h-12 rounded-xl bg-terracotta-600/20 flex items-center justify-center text-2xl mb-5">🦪</div>
+          <h3 class="font-display font-semibold text-lg mb-2">Entrantes del mar</h3>
+          <p class="text-navy-100/70 text-sm leading-relaxed">Mejillones, navajas, berberechos y pulpo, preparados al momento.</p>
+        </div>
+        <div class="tilt-card reveal reveal-delay-1 bg-navy-700/60 border border-white/10 rounded-2xl p-8 hover:border-terracotta-400/50">
+          <div class="tilt-icon w-12 h-12 rounded-xl bg-terracotta-600/20 flex items-center justify-center text-2xl mb-5">🍤</div>
+          <h3 class="font-display font-semibold text-lg mb-2">Marisco de lonja</h3>
+          <p class="text-navy-100/70 text-sm leading-relaxed">Gambas, cigalas y marisco fresco según la subasta del día.</p>
+        </div>
+        <div class="tilt-card reveal reveal-delay-2 bg-navy-700/60 border border-white/10 rounded-2xl p-8 hover:border-terracotta-400/50">
+          <div class="tilt-icon w-12 h-12 rounded-xl bg-terracotta-600/20 flex items-center justify-center text-2xl mb-5">🍚</div>
+          <h3 class="font-display font-semibold text-lg mb-2">Arroces y fideuás</h3>
+          <p class="text-navy-100/70 text-sm leading-relaxed">Elaborados a fuego lento, pensados para compartir en la mesa.</p>
+        </div>
+        <div class="tilt-card reveal reveal-delay-3 bg-navy-700/60 border border-white/10 rounded-2xl p-8 hover:border-terracotta-400/50">
+          <div class="tilt-icon w-12 h-12 rounded-xl bg-terracotta-600/20 flex items-center justify-center text-2xl mb-5">🐟</div>
+          <h3 class="font-display font-semibold text-lg mb-2">Pescado del día</h3>
+          <p class="text-navy-100/70 text-sm leading-relaxed">A la plancha, al horno o en suquet, según lo que traiga la lonja.</p>
+        </div>
+        <div class="tilt-card reveal reveal-delay-4 bg-navy-700/60 border border-white/10 rounded-2xl p-8 hover:border-terracotta-400/50">
+          <div class="tilt-icon w-12 h-12 rounded-xl bg-terracotta-600/20 flex items-center justify-center text-2xl mb-5">🥩</div>
+          <h3 class="font-display font-semibold text-lg mb-2">Carnes</h3>
+          <p class="text-navy-100/70 text-sm leading-relaxed">Para quien prefiere tierra: cortes sencillos, bien tratados.</p>
+        </div>
+        <div class="tilt-card reveal bg-navy-700/60 border border-white/10 rounded-2xl p-8 hover:border-terracotta-400/50">
+          <div class="tilt-icon w-12 h-12 rounded-xl bg-terracotta-600/20 flex items-center justify-center text-2xl mb-5">🍮</div>
+          <h3 class="font-display font-semibold text-lg mb-2">Postres caseros</h3>
+          <p class="text-navy-100/70 text-sm leading-relaxed">El cierre dulce a una comida sin prisa.</p>
+        </div>
+      </div>
+      <div class="mt-12 text-center reveal">
+        <a href="mailto:info@riesgallegues.restaurant?subject=Solicitud%20de%20carta" class="inline-flex items-center rounded-full border border-white/30 text-white font-semibold px-8 py-3.5 hover:bg-white/10 transition">
+          Solicitar la carta completa
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVAS -->
+  <section id="reservas" class="max-w-6xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center">
+    <div class="reveal">
+      <span class="text-terracotta-600 font-semibold text-sm uppercase tracking-wide">Reservas</span>
+      <h2 class="mt-3 font-display text-3xl sm:text-4xl font-semibold text-navy-800">Guárdate mesa antes de venir</h2>
+      <p class="mt-5 text-navy-700 text-lg leading-relaxed">
+        Solo abrimos a mediodía, así que en fines de semana y festivos se llena rápido. La forma más segura de asegurar mesa es llamando o escribiendo con antelación.
+      </p>
+      <div class="mt-8 space-y-4">
+        <a href="tel:+34972464646" class="flex items-center gap-4 rounded-2xl border border-navy-100 bg-white p-5 hover:border-terracotta-300 hover:shadow-md transition">
+          <span class="w-11 h-11 rounded-full bg-terracotta-50 text-terracotta-600 flex items-center justify-center text-xl">📞</span>
+          <span>
+            <span class="block font-semibold text-navy-800">+34 972 464 646</span>
+            <span class="block text-sm text-navy-500">Llamar para reservar</span>
+          </span>
+        </a>
+        <a href="mailto:info@riesgallegues.restaurant?subject=Reserva%20de%20mesa" class="flex items-center gap-4 rounded-2xl border border-navy-100 bg-white p-5 hover:border-terracotta-300 hover:shadow-md transition">
+          <span class="w-11 h-11 rounded-full bg-terracotta-50 text-terracotta-600 flex items-center justify-center text-xl">✉️</span>
+          <span>
+            <span class="block font-semibold text-navy-800">info@riesgallegues.restaurant</span>
+            <span class="block text-sm text-navy-500">Escribir para reservar</span>
+          </span>
+        </a>
+        <div class="flex items-center gap-4 rounded-2xl border border-navy-100 bg-white p-5">
+          <span class="w-11 h-11 rounded-full bg-terracotta-50 text-terracotta-600 flex items-center justify-center text-xl">🕐</span>
+          <span>
+            <span class="block font-semibold text-navy-800">De martes a domingo, 13:00h – 16:30h</span>
+            <span class="block text-sm text-navy-500">Lunes cerrado</span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1 rounded-3xl bg-navy-800 text-white p-10">
+      <h3 class="font-display text-2xl font-semibold">¿Grupo, niños o mascota?</h3>
+      <p class="mt-3 text-navy-100/80 leading-relaxed">
+        Dínoslo al reservar: preparamos la mesa según cuántos sois y si venís con peques o con el perro, para que todo esté listo cuando lleguéis.
+      </p>
+      <ul class="mt-6 space-y-3 text-sm text-navy-100/90">
+        <li class="flex items-center gap-2"><span class="text-terracotta-300">✓</span> Sillas altas disponibles para los más pequeños</li>
+        <li class="flex items-center gap-2"><span class="text-terracotta-300">✓</span> Terraza apta para mascotas, según disponibilidad</li>
+        <li class="flex items-center gap-2"><span class="text-terracotta-300">✓</span> Grupos grandes, con aviso previo</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACTO / UBICACION -->
+  <section id="contacto" class="bg-sand-100">
+    <div class="max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-14">
+      <div class="reveal">
+        <span class="text-terracotta-600 font-semibold text-sm uppercase tracking-wide">Cómo llegar</span>
+        <h2 class="mt-3 font-display text-3xl sm:text-4xl font-semibold text-navy-800">Te esperamos en Llambilles</h2>
+        <p class="mt-5 text-navy-700 leading-relaxed">Ctra. de Fornells, 1 esquina Ctra. Girona–Sant Feliu<br/>17243 Llambilles, Girona</p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Ctra.+de+Fornells+1%2C+17243+Llambilles%2C+Girona" target="_blank" rel="noopener" class="mt-6 inline-flex items-center rounded-full bg-navy-800 text-white font-semibold px-7 py-3.5 hover:bg-terracotta-600 transition">
+          Cómo llegar en Google Maps
+        </a>
+        <div class="mt-10 flex items-center gap-4">
+          <a href="https://instagram.com/riesgallegues" target="_blank" rel="noopener" class="w-11 h-11 rounded-full bg-white border border-navy-100 flex items-center justify-center hover:border-terracotta-300 transition">IG</a>
+          <a href="#" class="w-11 h-11 rounded-full bg-white border border-navy-100 flex items-center justify-center hover:border-terracotta-300 transition">FB</a>
+          <span class="text-navy-500 text-sm">@riesgallegues</span>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-1 rounded-3xl overflow-hidden border border-navy-100 aspect-video bg-navy-100 flex items-center justify-center text-navy-400 text-sm">
+        Mapa / foto del local (pendiente de material real)
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-navy-900 text-navy-200 text-sm">
+    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span class="logo-script text-lg text-white">Ries Gallegues</span>
+      <p class="text-center">Ctra. de Fornells, 1, 17243 Llambilles, Girona &middot; +34 972 464 646</p>
+      <p>&copy; 2026 Ries Gallegues. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <button id="back-to-top" aria-label="Volver arriba" class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-navy-800 text-white shadow-lg hover:bg-terracotta-600 transition-colors flex items-center justify-center">
+    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" /></svg>
+  </button>
+
+  <script>
+    var header = document.getElementById('site-header');
+    var progress = document.getElementById('scroll-progress');
+    var backToTop = document.getElementById('back-to-top');
+    function onScroll() {
+      var scrollTop = window.scrollY || document.documentElement.scrollTop;
+      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      progress.style.width = (height > 0 ? (scrollTop / height) * 100 : 0) + '%';
+      header.classList.toggle('is-scrolled', scrollTop > 8);
+      backToTop.classList.toggle('visible', scrollTop > 600);
+    }
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    backToTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+    var hamburger = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', function () {
+      var open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.querySelectorAll('#mobile-menu [data-nav]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    var navLinks = document.querySelectorAll('[data-nav]');
+    var sections = Array.from(navLinks).map(function (l) { return document.querySelector(l.getAttribute('href')); }).filter(Boolean);
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var id = '#' + entry.target.id;
+          navLinks.forEach(function (l) { l.classList.toggle('active', l.getAttribute('href') === id); });
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(function (s) { spy.observe(s); });
+
+    var revealer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('in-view'); revealer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function (el) { revealer.observe(el); });
+  </script>
+
+</body>
+</html>
